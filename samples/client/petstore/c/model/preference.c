@@ -23,14 +23,7 @@ openapi_petstore_preference__e preference_preference_FromString(char* preference
 }
 
 cJSON *preference_convertToJSON(openapi_petstore_preference__e preference) {
-    cJSON *item = cJSON_CreateObject();
-    if(cJSON_AddStringToObject(item, "preference", preference_preference_ToString(preference)) == NULL) {
-        goto fail;
-    }
-    return item;
-fail:
-    cJSON_Delete(item);
-    return NULL;
+    return cJSON_CreateString(preference_preference_ToString(preference));
 }
 
 openapi_petstore_preference__e preference_parseFromJSON(cJSON *preferenceJSON) {

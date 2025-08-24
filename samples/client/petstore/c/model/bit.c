@@ -23,14 +23,7 @@ openapi_petstore_bit__e bit_bit_FromString(char* bit) {
 }
 
 cJSON *bit_convertToJSON(openapi_petstore_bit__e bit) {
-    cJSON *item = cJSON_CreateObject();
-    if(cJSON_AddNumberToObject(item, "bit", bit) == NULL) {
-        goto fail;
-    }
-    return item;
-fail:
-    cJSON_Delete(item);
-    return NULL;
+    return cJSON_CreateNumber(bit);
 }
 
 openapi_petstore_bit__e bit_parseFromJSON(cJSON *bitJSON) {
