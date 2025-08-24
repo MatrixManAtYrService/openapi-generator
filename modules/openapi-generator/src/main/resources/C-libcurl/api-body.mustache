@@ -414,8 +414,7 @@ end:
         cJSON *{{{paramName}}}VarJSON;
         elementToReturn = list_createList();
         cJSON_ArrayForEach({{{paramName}}}VarJSON, {{paramName}}localVarJSON){
-            keyValuePair_t *keyPair = keyValuePair_create(strdup({{{paramName}}}VarJSON->string), {{{cJSONPrint}}}({{{paramName}}}VarJSON));
-            list_addElement(elementToReturn, keyPair);
+            list_addElement(elementToReturn, cJSON_Duplicate({{{paramName}}}VarJSON, 1));
         }
         cJSON_Delete({{paramName}}localVarJSON);
     }
