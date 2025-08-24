@@ -26,26 +26,15 @@ char* {{classFilename}}_{{classname}}_ToString({{projectName}}_{{classVarName}}_
 }
 
 cJSON *{{classname}}_convertToJSON({{projectName}}_{{classVarName}}_{{enumName}}_e {{classname}}) {
-    cJSON *item = cJSON_CreateObject();
 {{#isString}}
-    if(cJSON_AddStringToObject(item, "{{{classname}}}", {{classFilename}}_{{{classname}}}_ToString({{{classname}}})) == NULL) {
-        goto fail;
-    }
+    return cJSON_CreateString({{classFilename}}_{{{classname}}}_ToString({{{classname}}}));
 {{/isString}}
 {{#isNumeric}}
-    if(cJSON_AddNumberToObject(item, "{{{classname}}}", {{{classname}}}) == NULL) {
-        goto fail;
-    }
+    return cJSON_CreateNumber({{{classname}}});
 {{/isNumeric}}
 {{#isBoolean}}
-    if(cJSON_AddBoolToObject(item, "{{{classname}}}", {{{classname}}}) == NULL) {
-        goto fail;
-    }
+    return cJSON_CreateBool({{{classname}}});
 {{/isBoolean}}
-    return item;
-fail:
-    cJSON_Delete(item);
-    return NULL;
 }
 
 {{projectName}}_{{classVarName}}_{{enumName}}_e {{classname}}_parseFromJSON(cJSON *{{classname}}JSON) {
