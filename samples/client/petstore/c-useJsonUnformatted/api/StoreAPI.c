@@ -178,8 +178,7 @@ StoreAPI_getInventory(apiClient_t *apiClient)
         cJSON *VarJSON;
         elementToReturn = list_createList();
         cJSON_ArrayForEach(VarJSON, localVarJSON){
-            keyValuePair_t *keyPair = keyValuePair_create(strdup(VarJSON->string), cJSON_PrintUnformatted(VarJSON));
-            list_addElement(elementToReturn, keyPair);
+            list_addElement(elementToReturn, cJSON_Duplicate(VarJSON, 1));
         }
         cJSON_Delete(localVarJSON);
     }
